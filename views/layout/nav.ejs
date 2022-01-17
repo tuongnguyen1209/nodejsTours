@@ -1,0 +1,44 @@
+<header class="header">
+  <nav class="nav nav--tours">
+    <div class="nav_dropdown">
+      <a href="/" class="nav__el"> Tất cả các tours </a>
+      <div class="dropdown">
+        <ul class="slide">
+          <% listCate.forEach(element => { %>
+          <li>
+            <a href="/cate/<%= element.id %> " class="nav__el"
+              ><%= element.name %>
+            </a>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <form class="nav__search">
+      <button class="nav__search-btn">
+        <svg>
+          <use xlink:href="../images/icons.svg#icon-search"></use>
+        </svg>
+      </button>
+      <input
+        type="text"
+        placeholder="Tìm kiếm tours"
+        class="nav__search-input"
+      />
+    </form>
+  </nav>
+  <div class="header__logo">
+    <img src="../images/logo-white.png" alt="Natours logo" />
+  </div>
+  <nav class="nav nav--user">
+    <!-- <a href="#" class="nav__el">My bookings</a>
+    <button class="nav__el">Log out</button>
+    <a href="#" class="nav__el">
+      <img src="images/user.jpg" alt="User photo" class="nav__user-img" />
+      <span>Jonas</span>
+    </a> -->
+
+    <button class="nav__el">Đăng nhập</button>
+    <button class="nav__el nav__el--cta">Đăng ký</button>
+  </nav>
+</header>

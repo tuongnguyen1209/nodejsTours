@@ -1,0 +1,69 @@
+<section
+  class="section-header"
+  style="background: url('../<%= tour.image %>'), rgba(0, 0, 0, 0.4)"
+>
+  <div class="heading-box">
+    <h1 class="heading-primary">
+      <span> <%= tour.tourname %> </span>
+    </h1>
+    <div class="heading-box__group">
+      <div class="heading-box__detail">
+        <svg class="heading-box__icon">
+          <use xlink:href="img/icons.svg#icon-clock"></use>
+        </svg>
+        <span class="heading-box__text"><%= tour.time %> ngày </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-description">
+  <div class="overview-box">
+    <div>
+      <div class="overview-box__group">
+        <h2 class="heading-secondary ma-bt-lg">Thông tin tour</h2>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-calendar"></use>
+          </svg>
+          <span class="overview-box__label">Giá</span>
+          <span class="overview-box__text"> <%= tour.price %> </span>
+        </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-calendar"></use>
+          </svg>
+          <span class="overview-box__label">Nơi khởi hành</span>
+          <span class="overview-box__text"> <%= tour.departure %> </span>
+        </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-trending-up"></use>
+          </svg>
+          <span class="overview-box__label">Nơi đến</span>
+          <span class="overview-box__text"> <%= tour.destination %> </span>
+        </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-user"></use>
+          </svg>
+          <span class="overview-box__label">Thời gian</span>
+          <span class="overview-box__text"><%= tour.time %> ngày</span>
+        </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-star"></use>
+          </svg>
+          <span class="overview-box__label">Phương tiện di chuyển</span>
+          <span class="overview-box__text"><%= tour.vehicle %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="description-box">
+    <h2 class="heading-secondary ma-bt-lg">mô tả</h2>
+    <p class="description__text"><%= tour.sortdescription %></p>
+    <p class="description__text"><%= tour.description %></p>
+  </div>
+</section>
