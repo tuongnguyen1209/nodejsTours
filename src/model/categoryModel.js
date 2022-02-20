@@ -1,10 +1,11 @@
-const db = require("../config/database");
+const mongoose = require("mongoose");
 
-exports.getAll = (fun) => {
-  const sql = "select id, name from category";
+const { Schema } = mongoose;
 
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    fun(data);
-  });
-};
+const categorySchema = new Schema({
+  name: {
+    type: String,
+  },
+});
+
+module.exports = mongoose.model("category", categorySchema);

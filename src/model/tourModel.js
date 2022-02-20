@@ -1,29 +1,57 @@
-const db = require("../config/database");
+const mongoose = require("mongoose");
 
-exports.getAll = (fun) => {
-  const sql =
-    "select tours.id idtour, tours.name tourname, price,sortdescription,image,time,departure,destination,ct.name category,vehicle from tours,category ct where tours.id_cate=ct.id";
+const { Schema } = mongoose;
 
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    fun(data);
-  });
-};
+const toursSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    banner: {
+      type: String,
+      required: true,
+    },
+    sortDescription: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    time: {
+      type: Number,
+    },
+    destination: {
+      type: String,
+    },
+    departure: {
+      type: String,
+    },
+    vehicle: {
+      type: String,
+    },
 
-exports.getOne = async (id, fun) => {
-  const sql = `select tours.id idtour, tours.name tourname, price,sortdescription,description,image,time,departure,destination,ct.name category,vehicle from tours,category ct where tours.id_cate=ct.id and tours.id=${id}`;
+    view: {
+      type: Number,
+      default: 0,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "category",
+    },
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    fun(data);
-  });
-};
-
-exports.getByCate = (id, fun) => {
-  const sql = `select tours.id idtour, tours.name tourname, price,sortdescription,image,time,departure,destination,ct.name category,vehicle from tours,category ct where tours.id_cate=ct.id and tours.id_cate=${id} `;
-
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    fun(data);
-  });
-};
+module.exports = mongoose.model("tours", toursSchema);

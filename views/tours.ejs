@@ -5,16 +5,16 @@
     <div class="card__header">
       <div class="card__picture">
         <div class="card__picture-overlay">&nbsp;</div>
-        <img src="../<%= e.image %> " alt="Tour 1" class="card__picture-img" />
+        <img src="<%= e.banner %> " alt="Tour 1" class="card__picture-img" />
       </div>
 
       <h3 class="heading-tertirary">
-        <span><%= e.tourname %> </span>
+        <span><%= e.title %> </span>
       </h3>
     </div>
 
     <div class="card__details">
-      <p class="card__text"><%= e.sortdescription %></p>
+      <p class="card__text"><%= e.sortDescription %></p>
       <div class="card__data">
         <svg class="card__icon">
           <use xlink:href="img/icons.svg#icon-map-pin"></use>
@@ -50,7 +50,7 @@
         <span class="card__footer-value">5.0</span>
         <span class="card__footer-text">rating</span>
       </p>
-      <a href="/detail/<%= e.idtour %> " class="btn btn--green btn--small"
+      <a href="/detail/<%= e._id %> " class="btn btn--green btn--small"
         >Chi tiết</a
       >
     </div>
