@@ -39,3 +39,92 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+
+<div class="container mt-5">
+  <h2 class="text-success">Danh sách tour xem nhiều</h2>
+  <div class="row" id="list-top"></div>
+</div>
+<div class="container mt-5">
+  <h2 class="text-success">Danh sách tour mới trong tuần</h2>
+  <div class="row" id="list-new"></div>
+</div>
+
+<script>
+  const formatPrice = (a) => {
+    return a.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+  };
+
+  fetch("/api/v1/tour?sort=-view&limit=6")
+    .then((rs) => rs.json())
+    .then((rs) => {
+      console.log(rs);
+      let str = "";
+      rs.data.forEach((element) => {
+        str += `
+        <div class="col-md-4 p-2">
+      <div class="card" style="width: 100%">
+        <img
+          class="card-img-top"
+          src="${element.banner}"
+          alt="Card image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <h1 class="card-title">${element.title || ""}</h1>
+          <h3 class="card-text">
+            ${element?.sortDescription || ""}
+          </h3>
+          <h4 style="font-size:'18px'
+          "> ${formatPrice(element?.price)} </h4>
+
+
+          <a href="/detail/${
+            element?.id
+          }" class="btn btn-primary">Xem chi tiết</a>
+        </div>
+      </div>
+      <br />
+    </div>
+        `;
+      });
+
+      document.getElementById("list-top").innerHTML = str;
+    });
+
+  fetch("/api/v1/tour?status=Tour mới&limit=6")
+    .then((rs) => rs.json())
+    .then((rs) => {
+      console.log(rs);
+      let str = "";
+      rs.data.forEach((element) => {
+        str += `
+        <div class="col-md-4 p-2">
+      <div class="card" style="width: 100%">
+        <img
+          class="card-img-top"
+          src="${element.banner}"
+          alt="Card image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <h1 class="card-title">${element.title || ""}</h1>
+          <h3 class="card-text">
+            ${element?.sortDescription || ""}
+          </h3>
+          <h4 style="font-size:'18px'
+          "> ${formatPrice(element?.price)} VND</h4>
+
+
+          <a href="/detail/${
+            element?.id
+          }" class="btn btn-primary">Xem chi tiết</a>
+        </div>
+      </div>
+      <br />
+    </div>
+        `;
+      });
+
+      document.getElementById("list-new").innerHTML = str;
+    });
+</script>

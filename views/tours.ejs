@@ -1,59 +1,139 @@
-<div class="card-container">
-  <% tours.forEach(e => { %>
-
-  <div class="card">
-    <div class="card__header">
-      <div class="card__picture">
-        <div class="card__picture-overlay">&nbsp;</div>
-        <img src="<%= e.banner %> " alt="Tour 1" class="card__picture-img" />
-      </div>
-
-      <h3 class="heading-tertirary">
-        <span><%= e.title %> </span>
-      </h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="list-group list-group-flush" id="category"></ul>
     </div>
-
-    <div class="card__details">
-      <p class="card__text"><%= e.sortDescription %></p>
-      <div class="card__data">
-        <svg class="card__icon">
-          <use xlink:href="img/icons.svg#icon-map-pin"></use>
-        </svg>
-        <span><%= e.departure %> </span>
-      </div>
-      <div class="card__data">
-        <svg class="card__icon">
-          <use xlink:href="img/icons.svg#icon-calendar"></use>
-        </svg>
-        <span> <span><%= e.destination %> </span></span>
-      </div>
-      <div class="card__data">
-        <svg class="card__icon">
-          <use xlink:href="img/icons.svg#icon-flag"></use>
-        </svg>
-        <span><%= e.time %> ngày</span>
-      </div>
-      <div class="card__data">
-        <svg class="card__icon">
-          <use xlink:href="img/icons.svg#icon-user"></use>
-        </svg>
-        <span><%= e.vehicle %> </span>
-      </div>
-    </div>
-
-    <div class="card__footer">
-      <p>
-        <span class="card__footer-value"><%= e.price %> </span>
-        <span class="card__footer-text">/1 người</span>
-      </p>
-      <p class="card__ratings">
-        <span class="card__footer-value">5.0</span>
-        <span class="card__footer-text">rating</span>
-      </p>
-      <a href="/detail/<%= e._id %> " class="btn btn--green btn--small"
-        >Chi tiết</a
-      >
+    <div class="col-md-10">
+      <div class="card-container" id="list-tour"></div>
     </div>
   </div>
-  <% }) %>
 </div>
+
+<script>
+  const formatPrice = (a) => {
+    return a.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+  };
+  const getData = (category, kw) => {
+    let url = "/api/v1/tour";
+    if (kw) url += `?kw=${kw}`;
+    else if (category) url += `?category=${category}`;
+
+    fetch(url)
+      .then((rs) => rs.json())
+      .then((rs) => {
+        let str = "";
+
+        rs.data.forEach((e) => {
+          str += `
+            <div class="card">
+          <div class="card__header">
+            <div class="card__picture">
+              <div class="card__picture-overlay">&nbsp;</div>
+              <img
+                src="${e.banner} "
+                alt="Tour 1"
+                class="card__picture-img"
+              />
+            </div>
+
+            <h3 class="heading-tertirary">
+              <span> ${e.title} </span>
+            </h3>
+          </div>
+
+          <div class="card__details">
+            <p class="card__text">  ${e.sortDescription}  </p>
+            <div class="card__data">
+              <svg class="card__icon">
+                <use xlink:href="img/icons.svg#icon-map-pin"></use>
+              </svg>
+              <span> ${e.departure} </span>
+            </div>
+            <div class="card__data">
+              <svg class="card__icon">
+                <use xlink:href="img/icons.svg#icon-calendar"></use>
+              </svg>
+              <span> <span>${e.destination}  </span></span>
+            </div>
+            <div class="card__data">
+              <svg class="card__icon">
+                <use xlink:href="img/icons.svg#icon-flag"></use>
+              </svg>
+              <span>${e.time}  ngày</span>
+            </div>
+            <div class="card__data">
+              <svg class="card__icon">
+                <use xlink:href="img/icons.svg#icon-user"></use>
+              </svg>
+              <span> ${e.vehicle} </span>
+            </div>
+          </div>
+
+          <div class="card__footer">
+            <p>
+              <span class="card__footer-value"> ${formatPrice(
+                e.price
+              )}   </span>
+              
+            </p>
+            <p class="card__ratings">
+              <span class="card__footer-value">5.0</span>
+              <span class="card__footer-text">rating</span>
+            </p>
+            <a href="/detail/${e._id} " class="btn btn--green btn--small"
+              >Chi tiết</a
+            >
+          </div>
+        </div>
+            `;
+        });
+        document.getElementById("list-tour").innerHTML = str;
+      });
+  };
+  const loadCate = () => {
+    fetch("/api/v1/category")
+      .then((rs) => rs.json())
+      .then((rs) => {
+        let str = "";
+        rs.data.forEach((e) => {
+          str += ` 
+          <li class="list-group-item item-cate" onclick=getData('${e._id}') >
+            ${e.name}
+            </li>
+          `;
+        });
+        document.getElementById("category").innerHTML = str;
+      });
+  };
+
+  const getQueryStringParams = (query) => {
+    return query
+      ? (/^[?#]/.test(query) ? query.slice(1) : query)
+          .split("&")
+          .reduce((params, param) => {
+            let [key, value] = param.split("=");
+            params[key] = value
+              ? decodeURIComponent(value.replace(/\+/g, " "))
+              : "";
+            return params;
+          }, {})
+      : {};
+  };
+  window.onload = () => {
+    const params = getQueryStringParams(window.location.search);
+
+    getData(null, params.kw);
+    loadCate();
+  };
+</script>
+
+<style>
+  .item-cate {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .item-cate:hover {
+    color: white;
+    background-color: #55c57a;
+  }
+</style>

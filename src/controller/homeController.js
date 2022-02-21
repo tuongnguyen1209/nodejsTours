@@ -3,7 +3,6 @@ const tourModel = require("../model/tourModel");
 
 exports.home = async (req, res) => {
   const listCate = await categoryModel.find();
-  console.log(listCate);
 
   res.render("index", { page: "home", listCate });
 };
@@ -15,13 +14,15 @@ exports.getDetail = async (req, res) => {
 
   const tour = await tourModel.findById(id);
 
+  tour.view++;
+
+  await tour.save();
+
   res.render("index", { tour, listCate, page: "detail" });
 };
 
-exports.home = async (req, res) => {
+exports.getTours = async (req, res) => {
   const listCate = await categoryModel.find();
 
-  const tours = await tourModel.find();
-
-  res.render("index", { page: "all", listCate, tours });
+  res.render("index", { page: "tours", listCate });
 };

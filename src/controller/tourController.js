@@ -3,9 +3,20 @@ const ApiFeature = require("../utils/apisFeature");
 const tryCatchHandle = require("../utils/tryCatchHandle");
 
 exports.getAll = tryCatchHandle(async (req, res) => {
-  const feature = new ApiFeature(tourModel.find(), req.query).limitFields(
-    "-__v"
-  );
+  let find = null;
+
+  if (req.query.kw) {
+    const reg = new RegExp(req.query.kw, "gi");
+    find = tourModel.find({ title: { $in: [reg] } });
+  } else {
+    find = tourModel.find();
+  }
+
+  const feature = new ApiFeature(find, req.query, tourModel.countDocuments())
+    .filter()
+    .sort()
+    .paginate()
+    .limitFields("-__v");
 
   const tours = await feature.query;
 
@@ -36,5 +47,24 @@ exports.getOne = tryCatchHandle(async (req, res) => {
   res.json({
     status: "success",
     data: tour,
+  });
+});
+
+exports.update = tryCatchHandle(async (req, res, next) => {
+  const tour = await tourModel.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.status(200).json({
+    status: "Success",
+    data: {
+      tour,
+    },
+  });
+});
+
+exports.delete = tryCatchHandle(async (req, res, next) => {
+  await tourModel.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    status: "Success",
   });
 });

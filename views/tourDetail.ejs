@@ -1,10 +1,10 @@
 <section
   class="section-header"
-  style="background: url('../<%= tour.image %>'), rgba(0, 0, 0, 0.4)"
+  style="background: url(<%= tour.banner %>), rgba(0, 0, 0, 0.4)"
 >
   <div class="heading-box">
     <h1 class="heading-primary">
-      <span> <%= tour.tourname %> </span>
+      <span> <%= tour.title %> </span>
     </h1>
     <div class="heading-box__group">
       <div class="heading-box__detail">
@@ -27,7 +27,9 @@
             <use xlink:href="img/icons.svg#icon-calendar"></use>
           </svg>
           <span class="overview-box__label">Giá</span>
-          <span class="overview-box__text"> <%= tour.price %> </span>
+          <span class="overview-box__text" id="pricetour">
+            <%= tour.price %>
+          </span>
         </div>
         <div class="overview-box__detail">
           <svg class="overview-box__icon">
@@ -57,13 +59,245 @@
           <span class="overview-box__label">Phương tiện di chuyển</span>
           <span class="overview-box__text"><%= tour.vehicle %></span>
         </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-star"></use>
+          </svg>
+          <span class="overview-box__label">Đánh giá</span>
+          <span class="overview-box__text"><%= tour.rating %></span>
+        </div>
+        <div class="overview-box__detail">
+          <svg class="overview-box__icon">
+            <use xlink:href="img/icons.svg#icon-star"></use>
+          </svg>
+          <span class="overview-box__label">Số lượt xem</span>
+          <span class="overview-box__text"><%= tour.view %></span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="description-box">
     <h2 class="heading-secondary ma-bt-lg">mô tả</h2>
-    <p class="description__text"><%= tour.sortdescription %></p>
+    <p class="description__text"><%= tour.sortDescription %></p>
     <p class="description__text"><%= tour.description %></p>
   </div>
 </section>
+
+<section class="section-pictures">
+  <div class="picture-box">
+    <img
+      class="picture-box__img picture-box__img--1"
+      src="https://cand.com.vn/Files/Image/hoaithu/2020/06/10/2d403935-9379-4b70-ba33-88591570e1b5.jpg"
+      alt="The Park Camper Tour 1"
+    />
+  </div>
+  <div class="picture-box">
+    <img
+      class="picture-box__img picture-box__img--2"
+      src="https://destination-review.com/wp-content/uploads/2021/04/25113751-ba-ria-vung-tau-1200x600.jpg"
+      alt="The Park Camper Tour 1"
+    />
+  </div>
+  <div class="picture-box">
+    <img
+      class="picture-box__img picture-box__img--3"
+      src="https://s1storage.2banh.vn/image/2014/10/nhung-hinh-anh-truc-tiep-cua-ha-noi-co-kinh-truoc-ngay-khoi-hanh-chuong-trinh-vespa-on-road-3960-1412124184-542b4e18dd516.jpg"
+      alt="The Park Camper Tour 1"
+    />
+  </div>
+</section>
+
+<section class="section-reviews">
+  <div class="reviews">
+    <div class="reviews__card">
+      <div class="reviews__avatar">
+        <img
+          src="img/users/user-7.jpg"
+          alt="Jim Brown"
+          class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user">Jim Brown</h6>
+      </div>
+      <p class="reviews__text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+        dignissimos sint quo commodi corrupti accusantium veniam saepe numquam.
+      </p>
+      <div class="reviews__rating">
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reviews__card">
+      <div class="reviews__avatar">
+        <img
+          src="img/users/user-14.jpg"
+          alt="Laura Wilson"
+          class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user">Laura Wilson</h6>
+      </div>
+      <p class="reviews__text">
+        Veniam adipisci blanditiis, corporis sit magnam aperiam ad, fuga
+        reiciendis provident deleniti cumque similique itaque animi, sapiente
+        obcaecati beatae accusantium.
+      </p>
+      <div class="reviews__rating">
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--inactive">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reviews__card">
+      <div class="reviews__avatar">
+        <img
+          src="img/users/user-15.jpg"
+          alt="Ben Hadley"
+          class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user">Ben Hadley</h6>
+      </div>
+      <p class="reviews__text">
+        Debitis, nesciunt itaque! At quis officia natus. Suscipit, reprehenderit
+        blanditiis mollitia distinctio ducimus porro tempore perspiciatis sunt
+        vel.
+      </p>
+      <div class="reviews__rating">
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reviews__card">
+      <div class="reviews__avatar">
+        <img
+          src="img/users/user-6.jpg"
+          alt="Alexander Jones"
+          class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user">Alexander Jones</h6>
+      </div>
+      <p class="reviews__text">
+        Quaerat laborum eveniet ut aut maiores doloribus mollitia aperiam quis
+        praesentium sed inventore harum aliquam veritatis at adipisci ea
+        assumenda!
+      </p>
+      <div class="reviews__rating">
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reviews__card">
+      <div class="reviews__avatar">
+        <img
+          src="img/users/user-3.jpg"
+          alt="Ayla Cornell"
+          class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user">Ayla Cornell</h6>
+      </div>
+      <p class="reviews__text">
+        Perferendis quo aliquid iste quas laboriosam molestias illo est
+        voluptatem odit ea. Vero placeat culpa provident dicta maiores!
+      </p>
+      <div class="reviews__rating">
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+        <svg class="reviews__star reviews__star--active">
+          <use xlink:href="img/icons.svg#icon-star"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-cta">
+  <div class="cta">
+    <div class="cta__img cta__img--logo">
+      <img src="img/logo-white.png" alt="Natours logo" class="" />
+    </div>
+    <img src="img/tour-5-2.jpg" alt="" class="cta__img cta__img--1" />
+    <img src="img/tour-5-1.jpg" alt="" class="cta__img cta__img--2" />
+
+    <div class="cta__content">
+      <h2 class="heading-secondary">Bạn còn chờ gì nữa?</h2>
+      <p class="cta__text">
+        Hãy đến với chúng tối và tận hưởng những giây phút thỏa mái nào
+      </p>
+      <button class="btn btn--green span-all-rows">Book tour now!</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const formatPrice = (a) => {
+    return a.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+  };
+
+  let a = document.getElementById("pricetour");
+  a.innerText = formatPrice(Number.parseInt(a.textContent.trim()));
+</script>

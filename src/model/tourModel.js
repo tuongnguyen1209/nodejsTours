@@ -43,6 +43,14 @@ const toursSchema = new Schema(
       type: Number,
       default: 0,
     },
+    status: {
+      type: String,
+      default: 0,
+      enum: {
+        values: ["Tour mới", "nomal"],
+        message: "{VALUE} không hỗ trợ",
+      },
+    },
     category: {
       type: Schema.Types.ObjectId,
       ref: "category",
